@@ -1,53 +1,269 @@
-/* --- All Previous CSS Content Stays --- */
-/* (See the previous response for the full body of CSS) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@500;700&display=swap');
 
-/* --- NEW ENHANCEMENTS START HERE --- */
-
-/* 1. Enhanced Dashboard Metric Layout for Centered Text */
-.metric {
-    position: relative; /* Needed for absolute positioning of chart text */
+/* Color Palette: Blue (Primary), Teal (Accent), White/Light Gray (Background) */
+:root {
+    --primary-blue: #007bff;
+    --secondary-teal: #17a2b8;
+    --background-light: #f4f7f6;
+    --card-background: #ffffff;
+    --text-dark: #333333;
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-hover: rgba(0, 0, 0, 0.15);
 }
 
-/* Container for Safety Chart to center the incident count */
-#safetyChartContainer {
-    position: relative;
-    height: 220px; /* Match canvas height */
-    margin: 10px 0;
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    opacity: 0; /* Hidden initially, controlled by JS preloader */
 }
 
-#safetyChartCenterText {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+/* --- Keyframe Animations --- */
+@keyframes flask-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px) rotate(5deg); }
+}
+@keyframes slide-in-top {
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Fade and Slide effects for sections/cards (Initial State) */
+.fade-in, .slide-up-1, .slide-up-2, .slide-up-3, .slide-up-4, .slide-up-5, .slide-up-6, 
+.slide-left-1, .slide-left-2, .slide-left-3, .slide-right-1, .slide-right-2 { 
+    opacity: 0; 
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/* Specific starting positions for animation */
+.slide-up-1, .slide-up-2, .slide-up-3, .slide-up-4, .slide-up-5, .slide-up-6 { transform: translateY(50px); }
+.slide-left-1, .slide-left-2, .slide-left-3 { transform: translateX(-50px); }
+.slide-right-1, .slide-right-2 { transform: translateX(50px); }
+
+/* Apply transition delays for staggered effect (Final State when 'show-element' is added) */
+.slide-up-1 { transition-delay: 0.2s; }
+.slide-up-2 { transition-delay: 0.3s; }
+.slide-up-3 { transition-delay: 0.4s; }
+.slide-up-4 { transition-delay: 0.5s; }
+.slide-up-5 { transition-delay: 0.6s; }
+.slide-up-6 { transition-delay: 0.7s; }
+.slide-left-1 { transition-delay: 0.2s; }
+.slide-left-2 { transition-delay: 0.4s; }
+.slide-left-3 { transition-delay: 0.6s; }
+.slide-right-1 { transition-delay: 0.2s; }
+.slide-right-2 { transition-delay: 0.4s; }
+
+/* Class added by JavaScript when element is in view */
+.show-element { opacity: 1; transform: translate(0, 0); }
+
+/* --- Preloader Styling --- */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: white;
+    transition: opacity 0.5s ease-out, visibility 0.5s;
+}
+
+.loader-flask i {
+    font-size: 5em;
+    margin-bottom: 20px;
+    animation: flask-bounce 1.5s infinite;
+}
+
+/* --- Navbar --- */
+.navbar {
+    background: linear-gradient(90deg, var(--primary-blue), #0056b3);
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: box-shadow 0.3s, border-bottom 0.3s;
+}
+
+.navbar.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-bottom: 3px solid #ffd700;
+}
+
+.navbar .logo {
     font-family: 'Montserrat', sans-serif;
-    text-align: center;
-    pointer-events: none; /* Allows clicks to pass through to the canvas */
-    line-height: 1.2;
-}
-
-#safetyChartCenterText .total-count {
-    font-size: 2.2em;
+    font-size: 1.7em;
     font-weight: 700;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s;
+}
+
+.navbar a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background-color: #ffd700;
+    bottom: 0;
+    left: 50%;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+.navbar a:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+/* --- Hero Section --- */
+.hero {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+    box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8em;
+    margin-bottom: 10px;
+    transform: translateY(-20px);
+    opacity: 0;
+    animation: slide-in-top 1s forwards 0.5s;
+}
+
+.hero-subtitle {
+    font-size: 1.2em;
+    margin-top: 0;
+    opacity: 0;
+    animation: slide-in-top 1s forwards 1s;
+}
+
+/* --- Dashboard Section --- */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 40px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.dashboard-card {
+    background: var(--card-background);
+    border-radius: 15px;
+    box-shadow: 0 5px 20px var(--shadow-light);
+    padding: 25px;
+    text-align: center;
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+    border-left: 5px solid var(--primary-blue);
+    position: relative;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px var(--shadow-hover);
+    border-left-color: var(--secondary-teal);
+}
+
+.card-title {
+    margin-bottom: 20px;
     color: var(--primary-blue);
-    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3em;
 }
 
-#safetyChartCenterText .label {
-    font-size: 0.9em;
-    color: #666;
+/* Chart safety center text styles (used by JS plugin) */
+#safetyChartContainer {
+    height: 220px;
+    position: relative;
+}
+canvas { max-width: 100%; height: 220px; }
+
+
+/* --- Products Section --- */
+.products {
+    padding: 60px 20px;
+    max-width: 1300px;
+    margin: 20px auto;
+    text-align: center;
 }
 
-/* 2. Enhanced Button Press Animation (3D Effect) */
+.section-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2em;
+    color: var(--text-dark);
+    margin-bottom: 40px;
+    border-bottom: 3px solid var(--secondary-teal);
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.product-item {
+    background: var(--card-background);
+    border-radius: 15px;
+    box-shadow: 0 5px 20px var(--shadow-light);
+    padding: 0;
+    overflow: hidden;
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+}
+
+.product-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 40px var(--shadow-hover);
+}
+
+.product-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.5s;
+    border-bottom: 4px solid var(--secondary-teal);
+}
+
+.product-item:hover .product-img {
+    transform: scale(1.1);
+}
+
 .buy-btn {
-    /* Existing styles remain */
-    transition: all 0.2s ease-out;
-    transform: translateY(0);
+    background: linear-gradient(90deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 0 0 15px 15px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.1em;
+    transition: all 0.2s ease-out; /* Adjusted transition time */
     box-shadow: 0 4px #1e7e34; /* Subtle 3D shadow for 'pop' */
 }
 
 .buy-btn:hover {
-    /* Existing hover styles remain */
+    background: linear-gradient(90deg, #218838, #17a2b8);
     transform: translateY(-2px); /* Lift slightly on hover */
     box-shadow: 0 6px #1e7e34;
 }
@@ -58,8 +274,30 @@
     box-shadow: 0 2px #1e7e34;
 }
 
-/* 3. Subtle Navbar Glow on Scroll (Visual Feedback) */
-.navbar.scrolled {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    border-bottom: 3px solid #ffd700;
+/* --- Testimonials & News Sections --- */
+.testimonial-card, .news-card {
+    background: var(--card-background);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px var(--shadow-light);
+    border-bottom: 5px solid var(--primary-blue);
+    transition: background-color 0.3s, border-bottom-color 0.3s, transform 0.3s;
+}
+
+.testimonial-card:hover {
+    background-color: #eaf3f8;
+    border-bottom-color: var(--secondary-teal);
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-hover);
+}
+
+/* --- Media Queries --- */
+@media (max-width: 768px) {
+    .navbar { flex-direction: column; align-items: flex-start; }
+    .navbar ul { margin-top: 10px; flex-direction: column; gap: 10px; }
+    .dashboard, .product-grid, .testimonial-grid, .news-container { grid-template-columns: 1fr; }
+    .news-container { flex-direction: column; }
 }
