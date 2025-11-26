@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChemTech Industries Dashboard - Enhanced</title>
+    <title>ChemTech Industries Dashboard - Final Enhanced</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -14,7 +14,7 @@
         <div class="loader-flask">
             <i class="fas fa-flask"></i>
         </div>
-        <p>Loading Insights...</p>
+        <p>Loading Real-time Insights...</p>
     </div>
 
     <div id="main-content">
@@ -39,7 +39,7 @@
                 <h2 class="card-title"><i class="fas fa-chart-bar icon-blue"></i> Production Output (Tons)</h2>
                 <div class="filter-controls">
                     <select id="filterSelect" onchange="filterChart()">
-                        <option value="all">All Years</option>
+                        <option value="all">All Years (Real-time)</option>
                         <option value="2023">2023 (Simulated)</option>
                         <option value="2022">2022 (Actual)</option>
                     </select>
@@ -49,7 +49,9 @@
 
             <div class="metric dashboard-card slide-up-2">
                 <h2 class="card-title"><i class="fas fa-shield-alt icon-red"></i> Safety Incidents</h2>
-                <canvas id="safetyChart"></canvas>
+                <div id="safetyChartContainer">
+                    <canvas id="safetyChart"></canvas>
+                </div>
             </div>
 
             <div class="metric dashboard-card slide-up-3">
@@ -120,7 +122,7 @@
             </div>
         </section>
 
-        <footer>
+        <footer id="about">
             <div class="footer-content">
                 <p>&copy; 2023 ChemTech Industries. All rights reserved.</p>
                 <div class="footer-contact">
