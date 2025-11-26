@@ -3,135 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChemTech Industries Dashboard - Final Enhanced</title>
+    <title>ChemTech Industries Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
-    <div id="preloader">
-        <div class="loader-flask">
-            <i class="fas fa-flask"></i>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-flask"></i> ChemTech Industries
         </div>
-        <p>Loading Real-time Insights...</p>
-    </div>
+        <ul>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </nav>
+    <header class="hero">
+        <h1>Welcome to ChemTech Industries Dashboard</h1>
+        <p>Leading sustainable chemical manufacturing with real-time insights and premium products.</p>
+    </header>
 
-    <div id="main-content">
-        <nav class="navbar">
-            <div class="logo">
-                <i class="fas fa-flask logo-icon"></i> ChemTech Industries
+    <section id="dashboard" class="dashboard">
+        <div class="metric">
+            <h2><i class="fas fa-chart-bar"></i> Production Output (Tons)</h2>
+            <select id="filterSelect" onchange="filterChart()">
+                <option value="all">All Years</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+            </select>
+            <canvas id="productionChart"></canvas>
+        </div>
+        <div class="metric">
+            <h2><i class="fas fa-shield-alt"></i> Safety Incidents</h2>
+            <canvas id="safetyChart"></canvas>
+        </div>
+        <div class="metric">
+            <h2><i class="fas fa-trending-up"></i> Sales Trends (₹ Cr)</h2>
+            <canvas id="salesChart"></canvas>
+        </div>
+        <div class="metric">
+            <h2><i class="fas fa-leaf"></i> Environmental Impact (CO2 Tons)</h2>
+            <canvas id="envChart"></canvas>
+        </div>
+    </section>
+
+    <section id="products" class="products">
+        <h2>Featured Chemical Products</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://atomscientific.com/images/productPictures/2061/groupPicture.webp">
+                <h3>Acetic Acid</h3>
+                <p>High-purity solvent for industrial use.</p>
+                <p class="price">Price: ₹5,000/ton</p>
+                <button onclick="buyProduct('Acetic Acid')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
             </div>
-            <ul>
-                <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
-                <li><a href="#products" class="nav-link">Products</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-            </ul>
-        </nav>
-
-        <header class="hero">
-            <h1 class="hero-title">Welcome to ChemTech Industries Dashboard</h1>
-            <p class="hero-subtitle">Leading sustainable chemical manufacturing with real-time insights and premium products.</p>
-        </header>
-
-        <section id="dashboard" class="dashboard fade-in">
-            <div class="metric dashboard-card slide-up-1">
-                <h2 class="card-title"><i class="fas fa-chart-bar icon-blue"></i> Production Output (Tons)</h2>
-                <div class="filter-controls">
-                    <select id="filterSelect" onchange="filterChart()">
-                        <option value="all">All Years (Real-time)</option>
-                        <option value="2023">2023 (Simulated)</option>
-                        <option value="2022">2022 (Actual)</option>
-                    </select>
-                </div>
-                <canvas id="productionChart"></canvas>
+            <div class="product-card">
+                <img src="https://media.sciencephoto.com/c0/04/77/03/c0047703-800px-wm.jpg">
+                <h3>Sodium Hydroxide</h3>
+                <p>Essential for detergents and water treatment.</p>
+                <p class="price">Price: ₹4,200/ton</p>
+                <button onclick="buyProduct('Sodium Hydroxide')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
             </div>
-
-            <div class="metric dashboard-card slide-up-2">
-                <h2 class="card-title"><i class="fas fa-shield-alt icon-red"></i> Safety Incidents</h2>
-                <div id="safetyChartContainer">
-                    <canvas id="safetyChart"></canvas>
-                </div>
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx9W9AD08D9ZbQLGqvH1QpveCnCRmgApg3-A&s">
+                <h3>Ethanol</h3>
+                <p>Biofuel and disinfectant grade available.</p>
+                <p class="price">Price: ₹6,500/ton</p>
+                <button onclick="buyProduct('Ethanol')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
             </div>
+        </div>
+    </section>
 
-            <div class="metric dashboard-card slide-up-3">
-                <h2 class="card-title"><i class="fas fa-trending-up icon-green"></i> Sales Trends (₹ Cr)</h2>
-                <canvas id="salesChart"></canvas>
+    <section class="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <p>"ChemTech's products are top-notch for our pharma needs."</p>
+                <cite>- PharmaCorp Ltd.</cite>
             </div>
-
-            <div class="metric dashboard-card slide-up-4">
-                <h2 class="card-title"><i class="fas fa-leaf icon-teal"></i> Environmental Impact (CO2 Tons)</h2>
-                <canvas id="envChart"></canvas>
+            <div class="testimonial">
+                <p>"Reliable supply and excellent dashboard insights."</p>
+                <cite>- GreenChem Solutions</cite>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="products" class="products fade-in">
-            <h2 class="section-heading">Featured Chemical Products</h2>
-            <div class="product-grid">
-                <div class="product-card product-item slide-left-1">
-                    <img src="https://atomscientific.com/images/productPictures/2061/groupPicture.webp" alt="Acetic Acid" class="product-img">
-                    <h3 class="product-name">Acetic Acid</h3>
-                    <p class="product-desc">High-purity solvent for industrial use.</p>
-                    <p class="price">Price: ₹5,000/ton</p>
-                    <button class="buy-btn" onclick="buyProduct('Acetic Acid')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
-                </div>
+    <section class="news">
+        <h2>Latest News</h2>
+        <div class="news-item">
+            <h3>Sustainable Practices Award</h3>
+            <p>ChemTech Industries wins 2023 Green Chemistry Award for eco-friendly production.</p>
+        </div>
+        <div class="news-item">
+            <h3>New Product Launch</h3>
+            <p>Introducing bio-based ethanol for renewable energy markets.</p>
+        </div>
+    </section>
 
-                <div class="product-card product-item slide-left-2">
-                    <img src="https://media.sciencephoto.com/c0/04/77/03/c0047703-800px-wm.jpg" alt="Sodium Hydroxide" class="product-img">
-                    <h3 class="product-name">Sodium Hydroxide</h3>
-                    <p class="product-desc">Essential for detergents and water treatment.</p>
-                    <p class="price">Price: ₹4,200/ton</p>
-                    <button class="buy-btn" onclick="buyProduct('Sodium Hydroxide')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
-                </div>
-
-                <div class="product-card product-item slide-left-3">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx9W9AD08D9ZbQLGqvH1QpveCnCRmgApg3-A&s" alt="Ethanol" class="product-img">
-                    <h3 class="product-name">Ethanol</h3>
-                    <p class="product-desc">Biofuel and disinfectant grade available.</p>
-                    <p class="price">Price: ₹6,500/ton</p>
-                    <button class="buy-btn" onclick="buyProduct('Ethanol')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="testimonials fade-in">
-            <h2 class="section-heading">What Our Clients Say</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial testimonial-card slide-right-1">
-                    <p class="quote">"ChemTech's products are **top-notch** for our pharma needs. Reliable quality."</p>
-                    <cite>- PharmaCorp Ltd. <i class="fas fa-user-tie"></i></cite>
-                </div>
-                <div class="testimonial testimonial-card slide-right-2">
-                    <p class="quote">"Reliable supply and **excellent dashboard insights**. A truly modern partner."</p>
-                    <cite>- GreenChem Solutions <i class="fas fa-industry"></i></cite>
-                </div>
-            </div>
-        </section>
-
-        <section class="news fade-in">
-            <h2 class="section-heading">Latest News <i class="fas fa-newspaper"></i></h2>
-            <div class="news-container">
-                <div class="news-item news-card slide-up-5">
-                    <h3 class="news-title">Sustainable Practices Award <i class="fas fa-award"></i></h3>
-                    <p class="news-content">ChemTech Industries wins 2023 Green Chemistry Award for eco-friendly production.</p>
-                </div>
-                <div class="news-item news-card slide-up-6">
-                    <h3 class="news-title">New Product Launch: Biofuel Ethanol <i class="fas fa-rocket"></i></h3>
-                    <p class="news-content">Introducing **bio-based ethanol** for renewable energy markets, reducing carbon footprint.</p>
-                </div>
-            </div>
-        </section>
-
-        <footer id="about">
-            <div class="footer-content">
-                <p>&copy; 2023 ChemTech Industries. All rights reserved.</p>
-                <div class="footer-contact">
-                    <p>Contact: <a href="mailto:info@chemtechindustries.com">info@chemtechindustries.com</a></p>
-                    <p>Phone: +91-9876543210</p>
-                </div>
-            </div>
-        </footer>
-    </div>
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 ChemTech Industries. All rights reserved.</p>
+            <p>Contact: info@chemtechindustries.com | +91-9876543210</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
