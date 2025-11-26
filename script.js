@@ -22,7 +22,7 @@ const safetyData = {
 const salesData = {
     labels: ['2019', '2020', '2021', '2022', '2023'],
     datasets: [{
-        label: 'Sales ($M)',
+        label: 'Sales (₹ Cr)',
         data: [50, 45, 60, 70, 80],
         borderColor: '#4bc0c0',
         fill: false,
@@ -40,7 +40,7 @@ const envData = {
     }]
 };
 
-// Initialize charts with animations
+// Initialize charts with animations and tooltips
 const productionChart = new Chart(document.getElementById('productionChart'), {
     type: 'bar',
     data: productionData,
@@ -48,6 +48,15 @@ const productionChart = new Chart(document.getElementById('productionChart'), {
         animation: {
             duration: 2000,
             easing: 'easeInOutQuad'
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.parsed.y + ' Tons';
+                    }
+                }
+            }
         }
     }
 });
@@ -59,6 +68,15 @@ new Chart(document.getElementById('safetyChart'), {
         animation: {
             duration: 2000,
             easing: 'easeInOutQuad'
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.parsed + ' Incidents';
+                    }
+                }
+            }
         }
     }
 });
@@ -70,6 +88,15 @@ new Chart(document.getElementById('salesChart'), {
         animation: {
             duration: 2000,
             easing: 'easeInOutQuad'
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return '₹' + context.parsed.y + ' Cr';
+                    }
+                }
+            }
         }
     }
 });
@@ -81,6 +108,15 @@ new Chart(document.getElementById('envChart'), {
         animation: {
             duration: 2000,
             easing: 'easeInOutQuad'
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.parsed.y + ' Tons';
+                    }
+                }
+            }
         }
     }
 });
@@ -98,15 +134,8 @@ function filterChart() {
 
 // Buy product function
 function buyProduct(product) {
-    alert(`Thank you for purchasing ${product} from ChemTech Industries! (Demo alert)`);
+    alert(`Thank you for your interest in ${product} from ChemTech Industries! Please contact sales@chemtechindustries.com for purchase details.`);
 }
-
-// Update prices every 10 seconds
-setInterval(() => {
-    document.getElementById('price1').textContent = Math.floor(Math.random() * 100) + 40;
-    document.getElementById('price2').textContent = Math.floor(Math.random() * 100) + 30;
-    document.getElementById('price3').textContent = Math.floor(Math.random() * 100) + 50;
-}, 10000);
 
 // Simulate real-time production updates
 setInterval(() => {
